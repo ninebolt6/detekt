@@ -42,6 +42,15 @@ class KtNamedDeclarationSpec {
         }
 
         @Test
+        fun `is false for a function type parameter that has no name identifier`() {
+            val code = """
+                val callback: (Int) -> Unit = { }
+            """.trimIndent()
+
+            assertThat(firstParameter(code).isSingleUnderscore()).isFalse()
+        }
+
+        @Test
         fun `is true for a local property named with a single underscore`() {
             val code = """
                 fun foo() {
@@ -50,6 +59,13 @@ class KtNamedDeclarationSpec {
             """.trimIndent()
 
             assertThat(firstProperty(code).isSingleUnderscore()).isTrue()
+        }
+
+        @Test
+        fun `is false for a backtick-escaped underscore property`() {
+            val code = "val `_` = 3"
+
+            assertThat(firstProperty(code).isSingleUnderscore()).isFalse()
         }
 
         @Test
