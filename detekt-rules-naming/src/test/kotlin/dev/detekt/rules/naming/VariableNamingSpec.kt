@@ -124,8 +124,7 @@ class VariableNamingSpec {
                 val _ = 1
             }
         """.trimIndent()
-        // `val _ = ...` only compiles when Kotlin's experimental unused return value checker is enabled
-        assertThat(VariableNaming(Config.empty).lint(content = code, compile = false)).isEmpty()
+        assertThat(VariableNaming(Config.empty).lint(content = code)).isEmpty()
     }
 
     @Test

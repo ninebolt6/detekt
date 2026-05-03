@@ -9,3 +9,9 @@ dependencies {
     api(libs.kotlin.compiler)
     implementation(libs.kotlin.reflect)
 }
+
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.add("-Xreturn-value-checker=check")
+    }
+}
